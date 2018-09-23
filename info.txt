@@ -1,0 +1,9 @@
+for Sensor 
+1.fuel
+2.ultrasonic
+3.light
+use these when prompted
+
+for biometric 
+use 0 for wrong bimetric
+use anything else as correct biometric
