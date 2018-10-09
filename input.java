@@ -4,6 +4,7 @@ import java.util.*;
 import java.net.*;
 public class input
 {
+	static int fuelmain=100;
 	//This is the fucntion for fuel sensor//
 	public static void fueldata(String fuel)throws IOException,InterruptedException	
 	{
@@ -14,10 +15,17 @@ public class input
 		DataOutputStream tocarfueldat;
 		System.out.println("\ngetting fuel percentage from fuel sensor");
 
+		int half;
+		half=fuelmain-10;
+		
 		Random rand=new Random();
-		int fueldat=rand.nextInt(100)+0;
+		int fueldat=rand.nextInt((fuelmain-half)+1)+half;
 		String fueldatin=Integer.toString(fueldat);
-
+		fuelmain=fueldat;
+		if(fuelmain<10)
+		{
+			fuelmain=100;
+		}
 		System.out.println("\nFuel currently "+fueldatin+" percentage");
 		Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java carfunc\"");
 		Socket client=inserver.accept();
@@ -34,6 +42,15 @@ public class input
 	//This is the function for ultrasonic sensor//
 
 	public static void ultrasonicdata(String waves)throws IOException,InterruptedException
+	{
+		if(fuelmain<20)
+		{
+
+		System.out.println("----------------------------------------");
+		System.out.println("Low fuel Switched to Manual mode");
+		System.out.println("----------------------------------------");
+	}
+	else
 	{
 		System.out.println("----------------------------------------");
 		System.out.println("\nUltrsonic sensor is active");
@@ -60,59 +77,94 @@ public class input
 		inserver.close();
 
 		System.out.println("-----------------------------------------");
-
 	}
-	//This is the fucntion for light sensor//
-	 
-	public static void lightdata(String lux)throws IOException,InterruptedException
-        {
-                System.out.println("----------------------------------------");
-                System.out.println("\nlight sensor is active");
-                ServerSocket inserver=new ServerSocket(5557);
+}
+//This is the fucntion for light sensor//
 
-                DataOutputStream tocarlightdat;
-                System.out.println("\ngetting light data from light sensor");
-
-                Random rand=new Random();
-                int lightdat=rand.nextInt(100) + 0;
-                String lightdatin=Integer.toString(lightdat);
-
-                
-                System.out.println("\nLight currently at "+lightdatin+" lux");
-                Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java light\"");
-                Socket client=inserver.accept();
-
-                tocarlightdat=new DataOutputStream(client.getOutputStream());
-                tocarlightdat.writeBytes(lightdatin);
-
-                client.close();
-                inserver.close();
-
-                System.out.println("-----------------------------------------");
-
-        }
-
-	//This is the main function//
-	public static void main(String[] args)throws IOException,InterruptedException
+public static void lightdata(String lux)throws IOException,InterruptedException
+{
+	if(fuelmain<20)
 	{
-		Date date=new Date();
+		System.out.println("----------------------------------------");	
+		System.out.println("Fuel low Switched to manual mode");
+		System.out.println("----------------------------------------");
+	}
+	else
+	{
+		System.out.println("----------------------------------------");
+		System.out.println("\nlight sensor is active");
+		ServerSocket inserver=new ServerSocket(5557);
+
+		DataOutputStream tocarlightdat;
+		System.out.println("\ngetting light data from light sensor");
+
+		Random rand=new Random();
+		int lightdat=rand.nextInt(100) + 0;
+		String lightdatin=Integer.toString(lightdat);
+
+
+		System.out.println("\nLight currently at "+lightdatin+" lux");
+		Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java light\"");
+		Socket client=inserver.accept();
+
+		tocarlightdat=new DataOutputStream(client.getOutputStream());
+		tocarlightdat.writeBytes(lightdatin);
+
+		client.close();
+		inserver.close();
+
+		System.out.println("-----------------------------------------");
+	}
+}
+
+//This is the main function//
+public static void main(String[] args)throws IOException,InterruptedException
+{
+	System.out.println("Fuel currenltly in "+fuelmain+" Percentage");
+	int counter=0,breakv=0;
+	Date date=new Date();
+	while(true)
+	{
+		BufferedWriter tofile=new BufferedWriter(new FileWriter("log.txt",true));
 		System.out.println("Please Provide Biometric ");
 		BufferedReader bioin=new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter tofile=new BufferedWriter(new FileWriter("log.txt",true));
 		String bio=bioin.readLine();
 		if(bio.equals("0"))
 		{
-			System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
-			String Data="Unverified biometric access.accessdenied";
-			tofile.write(date+"\n"+Data+System.getProperty("line.separator")+"\n");
-			tofile.close();
-			Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
+			if(counter==0||counter==1||counter==2)
+			{
+				System.out.println("Try Again");
+				tofile.write("- "+date+"\n"+"- Wrong Biometric attempt"+counter+System.getProperty("line.separator")+"\n");
+				tofile.close();
+				counter++;
+			}
+			else
+			{
+				System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
+				String Data="Unverified biometric access.accessdenied";
+				tofile.write("- "+date+"\n- "+Data+"\n- attempt"+counter+System.getProperty("line.separator")+"\n");
+				tofile.close();
+				Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
+				
+                Socket client=new Socket("localhost",1372);
+				OutputStream outtoout=client.getOutputStream();
+                String edat1="exit";
+
+                PrintWriter p1=new PrintWriter(outtoout,true);
+                p1.println(edat1);
+
+                p1.println(edat1);
+
+                client.close();
+				break;
+			}
 		}
 
 		else
-		{
-
-			tofile.write(date+"\n"+"Biometric Ok,Car Started"+System.getProperty("line.separator")+"\n");
+		{	
+			System.out.println("FYI 1=fuel 2=ultrasonic 3=light 4=temperature");
+			breakv=1;
+			tofile.write("- "+date+"\n"+"-Biometric Ok,Car Started"+System.getProperty("line.separator")+"\n");
 			tofile.close();
 			int count=0;
 			while(true)
@@ -151,5 +203,9 @@ public class input
 			}
 
 		}
+		if(breakv==1)
+			break;
 	}
+}
+
 }

@@ -38,6 +38,10 @@ class output
 			{
 				System.out.println("Car is Started \n");
 			}
+			if(Data.equals("exit"))
+			{
+				System.out.println("Car cannot be started enter key manually \n");
+			}
 			else if(Data.equals("fuel"))
 			{
 				if(value.equals("180"))
@@ -45,7 +49,7 @@ class output
 				else if (value.equals("0"))
 				{
 					System.out.println("Car is Stopped due to low fuel\n");
-					Thread.sleep(2000);
+					Thread.sleep(3000);
 					System.out.println("Car is started again after refuelng\n");
 				}
 				else
@@ -57,16 +61,19 @@ class output
 				if(value.equals("0"))
 					System.out.println("No Obstacle still car still running\n");
 				else
-					System.out.println("Obstacle detected car Stopped\n");
+				{
+					System.out.println("Obstacle detected car speed reduced");
+					System.out.println("obstacle takencare.Car back to normal\n");
+			}
 			}
 			else if(Data.equals("light"))
 			{
 				System.out.println("Head lamp intensity is "+value+" lux.Adjusted as per Daylight");
 				int ldata=Integer.parseInt(value);
 				if(ldata>50)
-				System.out.println("Windshield UP");
+				System.out.println("Windshield UP\n");
 				else
-				System.out.println("Windshield DOWN");
+				System.out.println("Windshield DOWN\n");
 			}
 			continue;
 		}

@@ -10,9 +10,7 @@ class obstacle
                 Socket client=new Socket("localhost",5556);
 
                 BufferedReader cardata=new BufferedReader(new InputStreamReader(client.getInputStream()));
-                String cardatin=cardata.readLine();
-		System.out.println(cardatin);
-                
+                String cardatin=cardata.readLine();                
 		/* THE FOLLOWING TRANSFERS THE DATA TO OUTPUT FUNCTION*/
 
                 BufferedReader infromoutdat;
