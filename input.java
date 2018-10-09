@@ -89,7 +89,8 @@ public class input
 			System.out.println("----------------------------------------");
 		}
 		System.out.println("----------------------------------------");
-		System.out.println("\ntemperature sensor is active");
+		System.out.println("\nTemperature sensor is active");
+		System.out.println("\nAdjusting the Airconditioner accordingly");
 		Socket client=new Socket("localhost",1372);
 		OutputStream outtoout=client.getOutputStream();
 		String edat1="temp";
