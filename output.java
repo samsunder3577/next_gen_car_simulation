@@ -31,7 +31,7 @@ class output
 			String value=new String();
 			value=dat;
 
-			//				System.out.println(Data+"\n"+value);
+			//System.out.println(Data+"\n"+value);
 
 			client.close();
 			if(Data.equals("Start"))
@@ -62,6 +62,11 @@ class output
 			else if(Data.equals("light"))
 			{
 				System.out.println("Head lamp intensity is "+value+" lux.Adjusted as per Daylight");
+				int ldata=Integer.parseInt(value);
+				if(ldata>50)
+				System.out.println("Windshield UP");
+				else
+				System.out.println("Windshield DOWN");
 			}
 			continue;
 		}

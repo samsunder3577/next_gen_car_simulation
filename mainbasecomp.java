@@ -23,7 +23,7 @@ public class mainbasecomp
 		BufferedWriter tofile=new BufferedWriter(new FileWriter("log.txt",true));
 		if(Data.equals("fuel"))
 		{
-			tofile.write("\n"+Data+" :Data\n"+date+"\nSpeed is: "+value+"Kmph \n Adjusted according to fuel percentage\n"+System.getProperty("line.separator"));
+			tofile.write(Data+" :Data\n"+date+"\nSpeed is: "+value+"Kmph \n Adjusted according to fuel percentage\n"+System.getProperty("line.separator")+"\n");
 			tofile.close();
 		}
 		else if(Data.equals("ultrasonic"))
@@ -31,19 +31,19 @@ public class mainbasecomp
 
 			if(value.equals("0"))
 			{
-				tofile.write("\n"+Data+" :Data\n"+date+"\nSensor Detected :"+value+System.getProperty("line.separator"));
+				tofile.write(Data+" :Data\n"+date+"\nSensor Detected :"+value+System.getProperty("line.separator")+"\n");
 				tofile.close();
 			}
 			else
 			{
-				tofile.write("\n"+Data+" :Data\n"+date+"\nSensor Detected :1"+System.getProperty("line.separator"));
+				tofile.write(Data+" :Data\n"+date+"\nSensor Detected :1"+System.getProperty("line.separator")+"\n");
 				tofile.close();
 			}
 
 		}
 		else if(Data.equals("light"))
 		{
-			tofile.write("\n"+Data+" :Data\n"+date+"\nHeadlamp intensity: "+value+"lux\n Adjusted according to day light");
+			tofile.write(Data+" :Data\n"+date+"\nHeadlamp intensity: "+value+"lux\n Adjusted according to day light"+System.getProperty("line.separator")+"\n");
 			tofile.close();
 		}
 	}

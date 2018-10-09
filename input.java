@@ -104,14 +104,15 @@ public class input
 		{
 			System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
 			String Data="Unverified biometric access.accessdenied";
-			tofile.write("\r\n"+date+"\r\n"+Data+System.getProperty("line.separator"));
+			tofile.write(date+"\n"+Data+System.getProperty("line.separator")+"\n");
 			tofile.close();
+			Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
 		}
 
 		else
 		{
 
-			tofile.write("\n"+date+"\n"+"Biometric Ok,Car Started"+System.getProperty("line.separator"));
+			tofile.write(date+"\n"+"Biometric Ok,Car Started"+System.getProperty("line.separator")+"\n");
 			tofile.close();
 			int count=0;
 			while(true)
@@ -127,13 +128,13 @@ public class input
 
 					switch(data)
 					{
-						case "fuel":
+						case "1":
 							fueldata(data);
 							break;
-						case "ultrasonic":
+						case "2":
 							ultrasonicdata(data);
 							break;
-						case "light":
+						case "3":
 							lightdata(data);
 							break;
 						default:
@@ -142,6 +143,7 @@ public class input
 							tofile1.write(date+"\nUnknown source "+data+" Tried to access the car.access denied\n");
 							tofile1.close();
 							count=count+1;
+							Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
 							break;
 					}
 
