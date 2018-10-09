@@ -2,7 +2,7 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 import java.net.*;
-public class input
+class input
 {
 	static int fuelmain=100;
 	//This is the fucntion for fuel sensor//
@@ -154,38 +154,7 @@ public class input
 			System.out.println("Please Provide Biometric ");
 			BufferedReader bioin=new BufferedReader(new InputStreamReader(System.in));
 			String bio=bioin.readLine();
-			if(bio.equals("0"))
-			{
-				if(counter==0||counter==1||counter==2)
-				{
-					System.out.println("Try Again");
-					tofile.write("- "+date+"\n"+"- Wrong Biometric attempt"+counter+System.getProperty("line.separator")+"\n");
-					tofile.close();
-					counter++;
-				}
-				else
-				{
-					System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
-					String Data="Unverified biometric access.accessdenied";
-					tofile.write("- "+date+"\n- "+Data+"\n- attempt"+counter+System.getProperty("line.separator")+"\n");
-					tofile.close();
-					Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
-
-					Socket client=new Socket("localhost",1372);
-					OutputStream outtoout=client.getOutputStream();
-					String edat1="exit";
-
-					PrintWriter p1=new PrintWriter(outtoout,true);
-					p1.println(edat1);
-
-					p1.println(edat1);
-
-					client.close();
-					break;
-				}
-			}
-
-			else
+			if (bio.equals("0"))
 			{	
 				System.out.println("FYI 1=fuel 2=ultrasonic 3=light 4=temperature");
 				breakv=1;
@@ -229,11 +198,41 @@ public class input
 
 					}
 				}
+break;
 
 			}
-			if(breakv==1)
-				break;
-		}
-	}
+			else
+			{
+				if(counter==0||counter==1||counter==2)
+				{
+					System.out.println("Try Again");
+					tofile.write("- "+date+"\n"+"- Wrong Biometric attempt"+counter+System.getProperty("line.separator")+"\n");
+					tofile.close();
+					counter++;
+				}
+				else
+				{
+					System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
+					String Data="Unverified biometric access.accessdenied";
+					tofile.write("- "+date+"\n- "+Data+"\n- attempt"+counter+System.getProperty("line.separator")+"\n");
+					tofile.close();
+					Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
 
+					Socket client=new Socket("localhost",1372);
+					OutputStream outtoout=client.getOutputStream();
+					String edat1="exit";
+
+					PrintWriter p1=new PrintWriter(outtoout,true);
+					p1.println(edat1);
+
+					p1.println(edat1);
+
+					client.close();
+					break;
+				}
+			}
+		
+		}
+
+	}
 }
