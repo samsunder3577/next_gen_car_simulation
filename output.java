@@ -38,6 +38,12 @@ class output
 			{
 				System.out.println("Car is Started \n");
 			}
+			 
+			if(Data.equals("temp"))
+                        {
+                                System.out.println("A/C adjusted as per temperature \n");
+                        }
+			
 			if(Data.equals("exit"))
 			{
 				System.out.println("Car cannot be started enter key manually \n");
