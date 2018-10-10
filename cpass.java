@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.lang.*;
-class password
+class cpass
 {
 	//THIS IS THE BIOMETRIC CHANGE FUNCTION
 	public static void cbio()throws IOException
@@ -53,11 +53,10 @@ class password
 
 		System.out.println("====================================================================");
 		int count=0;
-		Socket client=new Socket("localhost",6566);
 		for(int i=0;i<3;i++)
 		{
 
-			System.out.println("ENTER PASSWORD TO START THE CAR");
+			System.out.println("ENTER PASSWORD TO CONTINUE");
 			BufferedReader pass=new BufferedReader(new InputStreamReader(System.in));
 
 			String passfrom=pass.readLine();
@@ -65,19 +64,10 @@ class password
 
 			BufferedReader passfromfile=new BufferedReader(reader);
 			String fileread=passfromfile.readLine();
-			DataOutputStream outt;
-			
-			//Socket client=new Socket("localhost",6566);
-			//BufferedReader innn=new BufferedReader(new InputStreamReader(client.getInputStream()));
-			//String inn=innn.readLine();
-			//System.out.println(fileread);
 			
 			if(passfrom.equals(fileread))
 			{
 				System.out.println("correct password");
-				outt=new DataOutputStream(client.getOutputStream());
-				outt.writeBytes("success");
-				client.close();
 				break;
 			}
 			else
@@ -92,10 +82,6 @@ class password
 				{
 					System.out.println("MANY WRONG ATTEMPTS THIS WILL BE REPORTED");
 				}
-				outt=new DataOutputStream(client.getOutputStream());
-				System.out.println("\n");
-				outt.writeBytes("failiure");
-				client.close();
 				break;
 				
 			}
@@ -147,10 +133,10 @@ class password
 	}
 
 	//THIS IS THE MAIN FUNCTION
-	public static void main(String[] args) throws IOException,InterruptedException
+	public static void main(String[] args) throws IOException
 	{
 
-		System.out.println("1:Enter the password\n2:Change Password\n3:Change Biometric\n4:CheckBio&password");
+		System.out.println("1:Enter the password\n2:Change Password\n3:Change Biometric");
 		String flag;
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 		flag=in.readLine();
@@ -165,27 +151,8 @@ class password
 			case "3":
 				cbio();
 				break;
-			case "4":
-				System.out.println("Enter the password");
-				BufferedReader pass=new BufferedReader(new InputStreamReader(System.in));
-				String passfrom=pass.readLine();
-				FileReader reader=new FileReader("password.txt");
-				BufferedReader passfromfile=new BufferedReader(reader);
-				String fileread=passfromfile.readLine();
-				if(passfrom.equals(fileread))
-				{
-						FileReader reader1=new FileReader("bio.txt");
-						BufferedReader passfromfile1=new BufferedReader(reader1);
-						String fileread1=passfromfile1.readLine();
-						System.out.println("Your Biometric is \n=>"+fileread1+"<=please compare");
-				}
-				else
-				{
-					System.out.println("Wrong Password.This will be Reported");
-				}
-				Thread.sleep(3000);
-				break;
 
 		}
 	}
 }
+

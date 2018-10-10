@@ -101,6 +101,10 @@ class input
 		p1.println(edat1);
 
 		client.close();
+		
+		BufferedWriter tofile=new BufferedWriter(new FileWriter("log.txt",true));
+		tofile.write("Temperature Data\nA/C Adjusted Accordingly\n\n");
+		tofile.close();
 		System.out.println("----------------------------------------");
 
 	}
@@ -195,7 +199,12 @@ class input
 								break;
 							case "4":
 								tempdata(data);
-								break;		
+								break;
+							case "pass":
+								System.out.println("----------------------------------------");
+								Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java cpass\"");
+								System.out.println("----------------------------------------");
+								break;
 							default:
 								System.out.println("Unknown Source detected.access Denied");
 								BufferedWriter tofile1=new BufferedWriter(new FileWriter("log.txt",true));

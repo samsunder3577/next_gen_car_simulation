@@ -1,9 +1,13 @@
-for Sensor 
+=>for Sensor 
 1.fuel
 2.ultrasonic
 3.light
+4:temperature
+pass:password console
 use these when prompted
 
-for biometric 
-use 0 for wrong bimetric
-use anything else as correct biometric
+=>For biometric 
+refer bio.txt.User can change it using password consle
+
+=>For Password
+refer password.txt.User can change it using password cosole
