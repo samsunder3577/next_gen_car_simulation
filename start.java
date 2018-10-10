@@ -11,6 +11,7 @@ public class start
 	     Runtime.getRuntime().exec("cmd /c \"javac output.java\"");
 	     Runtime.getRuntime().exec("cmd /c \"javac obstacle.java\"");
 	     Runtime.getRuntime().exec("cmd /c \"javac mainbasecontroller.java\"");
+	     Runtime.getRuntime().exec("cmd /c \"javac password.java\"");
 	     Runtime.getRuntime().exec("cmd /c \"javac mainbasecomp.java\"");
 	     Runtime.getRuntime().exec("cmd /c \"javac light.java\"");
 	     Runtime.getRuntime().exec("cmd /c start cmd.exe /k \"java output\"");

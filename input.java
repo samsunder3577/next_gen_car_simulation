@@ -147,14 +147,24 @@ class input
 	{
 		System.out.println("Fuel currenltly in "+fuelmain+" Percentage");
 		int counter=0,breakv=0;
+		
+		FileReader reader=new FileReader("bio.txt");
+		FileReader reader1=new FileReader("password.txt");
+		BufferedReader biofromfile=new BufferedReader(reader);
+		String filereader=biofromfile.readLine();
+		BufferedReader passfromfile=new BufferedReader(reader1);
+		String filereader1=passfromfile.readLine();
 		Date date=new Date();
 		while(true)
+		
 		{
-			BufferedWriter tofile=new BufferedWriter(new FileWriter("log.txt",true));
-			System.out.println("Please Provide Biometric ");
+			BufferedWriter tofile;
+			tofile=new BufferedWriter(new FileWriter("log.txt",true));
+			System.out.println("===========================================================");
+			System.out.println("Please Provide Biometric or password");
 			BufferedReader bioin=new BufferedReader(new InputStreamReader(System.in));
 			String bio=bioin.readLine();
-			if (bio.equals("0"))
+			if (bio.equals(filereader)||bio.equals(filereader1))
 			{	
 				System.out.println("FYI 1=fuel 2=ultrasonic 3=light 4=temperature");
 				breakv=1;
@@ -203,6 +213,8 @@ break;
 			}
 			else
 			{
+				
+				tofile=new BufferedWriter(new FileWriter("log.txt",true));
 				if(counter==0||counter==1||counter==2)
 				{
 					System.out.println("Try Again");
@@ -212,7 +224,7 @@ break;
 				}
 				else
 				{
-					System.out.println("\nYou have messed with kevcracks security System youre gonna pay for this\n");
+					System.out.println("\nTEAM KevCracks You will be reported\n");
 					String Data="Unverified biometric access.accessdenied";
 					tofile.write("- "+date+"\n- "+Data+"\n- attempt"+counter+System.getProperty("line.separator")+"\n");
 					tofile.close();
@@ -224,11 +236,32 @@ break;
 
 					PrintWriter p1=new PrintWriter(outtoout,true);
 					p1.println(edat1);
-
 					p1.println(edat1);
-
 					client.close();
+					
+					BufferedReader innn;
+					ServerSocket pass=new ServerSocket(6566);
+					Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java password\"");
+					Socket Client=pass.accept();
+
+					innn=new BufferedReader(new InputStreamReader(Client.getInputStream()));
+					String passs=innn.readLine();
+					
+					if(passs.equals("success"))
+					{
+						Client.close();
+					}
+					else
+					{
+					tofile=new BufferedWriter(new FileWriter("log.txt",true));
+					tofile.write("+++Password Wrong+++");
+                                        tofile.close();
+					Client.close();
+					Runtime.getRuntime().exec("cmd /c start cmd.exe /c \"java mainbasecontroller\"");
 					break;
+					}
+					pass.close();
+				
 				}
 			}
 		

@@ -10,7 +10,7 @@ public class mainbasecontroller
 		BufferedReader fromfile=new BufferedReader(reader);
 		
 		String fileread=fromfile.readLine();
-		BufferedWriter tofile=new BufferedWriter(new FileWriter("C://Theftlog.txt",true));
+		BufferedWriter tofile=new BufferedWriter(new FileWriter("C://Theftlog.txt",false));
 		
 		while(fileread!=null)
 		{
